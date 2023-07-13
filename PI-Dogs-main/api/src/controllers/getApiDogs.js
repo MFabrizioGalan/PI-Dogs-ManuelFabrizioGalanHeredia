@@ -7,7 +7,7 @@ const getApiDogs = async () => {
         return {
             id: dog.id,
             name: dog.name,
-            age: dog.age,
+            life_span: dog.life_span,
             image: dog.image.url,
             height: dog["height"]["metric"],
             weight: dog["weight"]["metric"],

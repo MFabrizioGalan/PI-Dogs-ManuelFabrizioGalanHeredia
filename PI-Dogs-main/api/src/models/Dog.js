@@ -26,7 +26,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    age: {
+    life_span: {
       type: DataTypes.STRING,
     },
     creteInDb: {  //con esta propiedad la usaremos en los filtros
@@ -34,5 +34,7 @@ module.exports = (sequelize) => {
       allowNull: false,
       defaultValue: true,
     },
-  });
+  },
+  { timestamps: false }
+  );
 };

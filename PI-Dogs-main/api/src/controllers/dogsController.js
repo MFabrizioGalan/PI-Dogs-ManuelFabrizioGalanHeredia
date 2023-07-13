@@ -14,11 +14,32 @@ const getAllDogs = async () => {
 };
 
 const getDogsById = async (id, source) => {
-    const dog = 
-        source === "api"
-            ? (await axios.get(`https://api.thedogapi.com/v1/breeds/${id}`))
-                .data
-            : await Dog.findByPk(id);
+    // const dog = 
+    //     source === "api"
+    //         ? (await axios.get(`https://api.thedogapi.com/v1/breeds/${id}`))
+    //             .data
+    //         : await Dog.findByPk(id);
+    // return dog;
+    let dog;
+    if (source === "api") {
+        const response = await axios.get(`https://api.thedogapi.com/v1/breeds/${id}`);
+        const { name, height, weight, life_span, temperament } = response.data;
+        const heightMetric = height.metric;
+        const weightMetric = weight.metric;
+        dog = { name, height: heightMetric, weight: weightMetric, life_span, temperament, createInDb: false };
+    } else {
+        dog = await Dog.findByPk(id, { include: Temperament});
+        // const dogFromDb = await Dog.findByPk(id);
+        // dog = {
+        //   name: dogFromDb.name,
+        //   height: dogFromDb.height.height.metric,
+        //   weight: dogFromDb.weight.weight.metric,
+        //   life_span: dogFromDb.life_span,
+        //   image: dogFromDb.image,
+        //   temperament: dogFromDb.temperament,
+        //   createInDb: true
+        // };
+    }
     return dog;
 };
 
@@ -28,7 +49,7 @@ const getDogsByName = async (name) => {
     return [...allDogs, ...dbDogs].filter(dog => dog.name.toLowerCase().includes(name.toLowerCase()));
 };
 
-const postDogs = async (name, height, weight, age, image, temperament, creatInDb) => {
+const postDogs = async (name, height, weight, life_span, image, temperament, creatInDb) => {
     const dbResponse = await Dog.findAll({
         where: {
             name: {
@@ -37,13 +58,13 @@ const postDogs = async (name, height, weight, age, image, temperament, creatInDb
         },
     });
     console.log(dbResponse);
-    if (dbResponse.lenght) throw new Error("Ya existe un perro con ese nombre");
+    if (dbResponse.length) throw new Error("Ya existe un perro con ese nombre");
 
     const newDog = await Dog.create({
         name: name,
         height: height,
         weight: weight,
-        age: age,
+        life_span: life_span,
         image: image,
         createInDb: true,
     });
@@ -54,14 +75,14 @@ const postDogs = async (name, height, weight, age, image, temperament, creatInDb
     }
 
     const temperamentsFound = [];
-    for (let i = 0; i < temperament.lenght; i++) {
-        const temperamentsFound = await Temperament.findOne({ where: { name: temperament[i]}});
-        if (!temperamentsFound) {
+    for (let i = 0; i < temperament.length; i++) {
+        const temperamentFound = await Temperament.findOne({ where: { name: temperament[i]}});
+        if (!temperamentFound) {
             throw new Error(`Tipo de ${temperament[i]} no existe`);
         }
-        temperamentsFound.push(temperamentsFound);
+        temperamentsFound.push(temperamentFound);
     }
-    await newDog.addTemperament(temperamentsFound);
+    await newDog.setTemperament(temperamentsFound);
     return newDog;
 };
 
