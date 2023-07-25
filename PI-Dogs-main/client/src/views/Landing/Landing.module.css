@@ -1,0 +1,125 @@
+@keyframes slideInDown {
+    from{
+      transform: translateY(-800px);
+    }
+    to{
+      transform: translateY(100px);
+      transform: scale(1.5);
+    }
+}
+@keyframes fade-in {
+    0% {
+      opacity: 0; /* El botón está completamente oculto al inicio */
+    }
+    100% {
+      opacity: 1; /* El botón es completamente visible al final */
+    }
+}
+.container {
+      top: 0px;
+      width: 100%;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: -20.5px;
+      
+}
+    
+.background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+}
+    
+.overlay {
+      position: absolute;
+      background-position: center;
+      width: 600px;
+      height: 300px;
+      top: 20%;
+      left: 53%;
+      background-color: rgba(0, 0, 0, 0);
+      margin-left: 10px;
+      transform: scale(0.5);
+}
+    
+.content {
+      position: absolute;
+      top: 68%;
+      left: 75.8%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 1;
+      
+}
+    
+.title {
+      /* font-size: 36px;
+      color: #fff;
+      animation-name: slideInDown;
+      animation-duration: 2s;
+      animation-timing-function: easy-in;
+      animation-delay: 0.5s;
+      animation-iteration-count: 1;
+      animation-direction: normal;
+      animation-fill-mode: both; */
+      
+      position: relative;
+      /* top: 110px;
+      left: 150px; */
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position:center;
+      margin-left: 10px;
+      z-index: 0;
+      
+      
+      animation-name: slideInDown;
+      animation-duration: 2s;
+      animation-timing-function: easy-in;
+      animation-delay: 0.5s;
+      animation-iteration-count: 1;
+      animation-direction: normal;
+      animation-fill-mode: both; 
+      transform: scale(1);
+
+
+}
+    
+.link {
+      text-decoration: none;
+      
+}
+    
+.button {
+      background-color: #fff;
+      color: #006287;
+      border: 2px dashed #006287 ;
+      border-radius: 25px;
+      padding: 12px 24px;
+      font-size: 24px;      
+      transition: 0.3s;
+      
+      cursor: pointer;
+  
+      opacity: 0; 
+      animation-name: fade-in;
+      animation-duration: 1s;
+      animation-delay: 2s; 
+      animation-fill-mode: forwards;
+}
+
+.button:hover {
+      background-color: #006287;;
+      color: #fff;
+      border: 2px dashed #fff ;
+
+      
+}
+    

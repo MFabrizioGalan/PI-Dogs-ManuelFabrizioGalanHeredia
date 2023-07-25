@@ -1,9 +1,10 @@
 const validateDog = (req, res, next) => {
-    const { name, weight, height, life_span } = req.body;
+    const { name, weight, height, life_span, precio } = req.body;
     if (!name) return res.status(400).json({ error: "Falta name"});
     if (!weight) return res.status(400).json({ error: "Falta weight"});
     if (!height) return res.status(400).json({ error: "Falta height"});
     if (!life_span) return res.status(400).json({ error: "Falta life_span"});
+    // if (!precio) return res.status(400).json({ error: "Falta precio"});
 
     next();
 };

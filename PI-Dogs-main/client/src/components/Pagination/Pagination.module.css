@@ -1,0 +1,53 @@
+.Pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+    background-color: #f3bcb4;
+    margin-bottom: -20px;
+    
+    background-image: url("../../extras/imagen-4.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+  
+.PageNumbers {
+    display: flex;
+    list-style: none;
+    padding: 20px;
+    
+}
+  
+.PageNumber {
+    background-color: #006287;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 4px;
+    transition: background-color 0.3s;
+}
+  
+  
+.PageNumber:hover {
+    background-color: #0044ff;
+}
+  
+.PageNumber:focus {
+    outline: none;
+}
+  
+.PageNumber.active {
+    background-color: #c2185b;
+}
+  
+.PageInfo {
+    color: #000000;
+    font-size: 14px;
+    margin: 0 8px;
+}
+  

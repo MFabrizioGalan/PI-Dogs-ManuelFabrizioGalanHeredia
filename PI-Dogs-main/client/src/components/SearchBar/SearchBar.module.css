@@ -1,0 +1,33 @@
+.SearchBarContainer {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+  
+.SearchInput {
+  font-size: 16px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+  width: 350px;
+}
+  
+.SearchButton {
+  font-size: 16px;
+  padding: 10px 10px;
+  background-color: #007bff;
+  border: none;
+  margin-right: 2em;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.SearchButton:hover {
+  background-color: #0044ff;
+}
+.Error {
+  color: #fff;
+  margin-top: -10px;
+}
+  

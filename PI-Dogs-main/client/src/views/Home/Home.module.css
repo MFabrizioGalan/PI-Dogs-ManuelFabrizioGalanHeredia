@@ -1,0 +1,140 @@
+.maincontainer{
+    background-image: url("../../extras/imagen-4.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    /* background-position: center; */
+}
+
+.cardContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 5px;
+    justify-items: center;
+    align-items: start;
+    margin-bottom: 20px;
+}
+
+.titleContainer {
+    background-image: url("../../extras/imagen-4.png");
+    opacity: 1;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+    box-shadow: 0px 4px 10px #0000001a;
+    
+}
+
+.title {
+    font-size: 48px;
+    color: #fff;
+    margin-top: 50px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px #0000001a;
+  }
+  
+h1 {
+    margin: 0;
+}
+ 
+.prevFilter {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    align-items: center;
+    margin-bottom: 0px;
+    /* background-color: #006387bb; */
+    background-color: #006287;
+    opacity: 1;
+    box-shadow: 0 2px 6px #0000001a;
+    padding: 0px;
+    position: sticky;
+    top: 60px;
+    z-index: 1;
+
+}
+
+.filterContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    /* background-color: #006287; */
+    background-color: #006387bb;
+    opacity: 1;
+    box-shadow: 0 2px 6px #0000001a;
+    padding: 4px;
+    position: sticky;
+    top: 118px;
+    z-index: 1;
+
+}
+  
+.filterOption {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.filterTitle1 {
+    font-size: 22px;
+    margin-right: 10px;
+    color: #fff;
+}
+
+.filterTitle {
+    font-size: 18px;
+    margin-right: 10px;
+    color: #fff;
+}
+  
+.selectContainer {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+  
+.filterLabel {
+    font-size: 16px;
+    margin-right: 10px;
+    white-space: nowrap;
+    color: #fff ;
+}
+  
+.filterSelect {
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+  
+.filterSelect:hover {
+    border-color: #007bff;
+}
+  
+.filterSelect:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px #007bff4d;
+}
+  
+.reloadButton {
+    padding: 8px 8px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 0px;
+}
+  
+.reloadButton:hover {
+    background-color: #0056b3;
+}
+  
