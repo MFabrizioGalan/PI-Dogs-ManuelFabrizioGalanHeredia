@@ -1,4 +1,4 @@
-.contentContainer {
+/* .contentContainer {
   background-color: #ffffff;
   border-radius: 10px;
   padding: 0px;
@@ -6,12 +6,59 @@
   transition: transform 0.3s ease;
   margin: 0px auto;
   width: 50%;
+} */
+/* .detailAll {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: aqua;
+
+} */
+/* *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:'Lato', sans-serif;
+} */
+
+.detailAll {
+  background-image: url("../../extras/imagen-4.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  height: 100vh; 
+  width: 100vw;
+
 }
+.contentContainer {
+  /* background-color: #fff;
+  border-radius: 10px;
+  padding: 0px;
+  box-shadow: 2px 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  margin-top: 0px;
+  width: 50%; */
+  display: inline-block;
+  width: 55%; 
+  height: 80%;
+  box-sizing: border-box;
+  padding: 10px;
+  margin-top: 100px;
+  position: relative;
+
+  /* background-color: #ffffff; */
+  background-color: #00638791;
+  border-radius: 50px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.195);
+  transition: all 0.3s ease;
+
+}
+
   
 .titleName {
   font-size: 36px;
   margin-bottom: 20px;
-  color: #c0b9b9;
+  color: #fff;
 }
   
 .imageContainer {
@@ -22,25 +69,67 @@
 }
   
 .image {
-  width: 600px;
+  width: 58%;
   height: auto;
+  border-radius: 25%;
 }
+.image2 {
+  position: absolute;
+  width: 60%;
+  height: auto;
+  border-radius: 25%;
+  transform: translateY(25%);
+  transition: 0.3s ease;
+  opacity: 0;
+}
+.contentContainer::before {
+  content: '';
+  position: absolute;
+  left: 0%;
+
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+
+  background-image: 
+    linear-gradient(
+      to bottom,
+      transparent 100%,
+      rgba(120, 107, 236, 0.5) 10%,
+      rgb(128, 108, 216) 85%
+    );
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+.contentContainer:hover::before {
+  opacity: 1;
+}
+.image2:hover {
+  opacity: 1;
+  transform: translateY(0%);
+
+}
+
   
 .contentContainer:hover {
-  transform: translateY(-10px);
+  transform: 
+    perspective(250px)
+    rotateX(10deg)
+    translateY(-10%)
+    translateZ(0);
 }
   
 .temperaments {
   font-size: 18px;
   margin-bottom: 10px;
+  color: #fff;
+  font-family:'Lato', sans-serif;
 }
   
 .info {
   font-size: 18px;
   margin-bottom: 10px;
+  color: #fff;
+  font-family:'Lato', sans-serif;
 }
   
-.detailAll {
-  background-repeat: no-repeat;
-  background-size: cover;
-}

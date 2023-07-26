@@ -28,10 +28,9 @@ const Form = () => {
     const [selectedTemps, setSelectedTemps] = useState([]);
     const [errors, setErrors] = useState({});
     const [filter] = useState("");
-    const filteredTemps = temperaments?.filter((temp) =>
-      temp.toLowerCase().includes(filter.toLowerCase())
-    );
-  
+  //   const filteredTemps = temperaments?.filter((temp) =>
+  //     temp.toLowerCase().includes(filter.toLowerCase())
+  //   );
     const handleChange = (event) => {
       //? Manejo del input
       const { name, value } = event.target;
@@ -70,7 +69,6 @@ const Form = () => {
     
       // Verificar si el temperamento seleccionado ya está en la lista de temperamentos mostrados
       const isDuplicate = temperaments.some((temp) => temp === selectedTemperament);
-    
       if (!isDuplicate) {
         try {
           await setInput((prevInput) => ({
@@ -203,16 +201,18 @@ const Form = () => {
                   className={styles.select}
                 >
                   <option value="" className={styles.a}>Seleccionar</option>
-                  {filteredTemps?.sort().map((temp) => (
-                    <option key={temp} value={temp}>
-                      {temp}
+                  {temperaments?.sort().map((temp) => (
+                    <option key={temp.id} value={temp.id}>
+                      {temp.name}
                     </option>
                   ))}
                 </select>
                 <div className={styles.selectedTemps}>
                   {selectedTemps?.sort().map((temp) => (
                     <div key={temp?.id} className={styles.selectedTemp}>
-                      <span>{temp}</span>
+                      <span>{
+                        temperaments.find(temperament => temperament.id == temp).name
+                        }</span>
                       <button
                         type="button"
                         onClick={() => handleRemove(temp)}
@@ -235,4 +235,3 @@ const Form = () => {
 };
   
 export default Form;
-  

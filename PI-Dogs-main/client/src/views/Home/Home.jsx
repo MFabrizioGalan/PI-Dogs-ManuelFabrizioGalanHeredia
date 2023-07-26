@@ -135,8 +135,8 @@ const Home = () => {
                             <option value="">Seleccionar</option>
                             <option value="All">Todos los temperamentos</option>
                             {tempState?.sort().map((temp) => (
-                                <option key={temp} value={temp}>
-                                    {temp}
+                                <option key={temp} value={temp.id}>
+                                    {temp.name}
                                 </option>
                             ))}
                         </select>

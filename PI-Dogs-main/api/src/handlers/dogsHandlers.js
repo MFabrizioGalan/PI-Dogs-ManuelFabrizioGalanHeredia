@@ -18,12 +18,12 @@ const getDogHandler = async (req, res) => {
 };
 
 const createDogHandler = async (req, res) => {
-    const { name, height, weight, life_span, image, temperament, createInDb } = req.body;
+    const { name, height, weight, life_span, image, temperament, temperaments, createInDb } = req.body;
     try {
-        if (!name || !height || !weight || !life_span || !image || !temperament){
+        if (!name || !height || !weight || !life_span || !image || !temperaments){
             throw Error("Falta información para crear el perro");
         } else {
-            const newDog = await postDogs (name, height, weight, life_span, image, temperament, createInDb );
+            const newDog = await postDogs (name, height, weight, life_span, image, temperaments, createInDb );
             res.status(201).json(newDog);
         }
     } catch (error) {

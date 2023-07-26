@@ -1,4 +1,4 @@
-const { getAllTemperaments, createTemperament, deleteTemperament, deleteTemperamentById } = require('../controllers/temperamentsController');
+const { getAllTemperaments, createTemperament, deleteTemperamentById } = require('../controllers/temperamentsController');
 
 const getTemperamentsHandler = async (req, res) => {
     const temperaments = await getAllTemperaments();

@@ -15,7 +15,7 @@ export const getTemperaments = () => {
     return async (dispatch) => {
         try {
             const response = await axios.get("http://localhost:3001/temperaments")
-            dispatch({ type: GET_TEMPERAMENTS, payload: [...response.data?.map(temperament => temperament.name)] })
+            dispatch({ type: GET_TEMPERAMENTS, payload: response.data })
         } catch (error) {
             error(error.message)
         }

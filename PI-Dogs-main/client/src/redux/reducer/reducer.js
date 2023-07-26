@@ -30,7 +30,8 @@ const reducer = (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 details: payload,
-            }
+            };
+            
         case POST_DOG:
             return {
                 ...state,
@@ -38,9 +39,10 @@ const reducer = (state = initialState, { type, payload }) => {
             }
         case FILTER_BY_TEMPERAMENT:
             const allDogs = state.dogsCopy 
-            const filterDog = (payload === "All") ?
+            const temperaments = state.temperaments
+            const filterDog = (payload === "All" || payload === "") ?
                 allDogs :
-                allDogs.filter(dog => dog.temperament?.includes(payload)); 
+                allDogs.filter(dog => dog.temperament?.includes(temperaments.find(temperament => temperament.id == payload).name)); 
             const filterDb = []; 
             allDogs.forEach(dog => { 
                 if (typeof dog.id === "string") {
@@ -104,7 +106,12 @@ const reducer = (state = initialState, { type, payload }) => {
             };
         case FILTER_BY_ORIGIN:
             const originDogs = state.dogsCopy;
-            const filterDogs = originDogs.filter((dog) => payload === 'created' ? dog.createInDb : !dog.createInDb)
+            let filterDogs = [];
+            if(payload === "all" || payload === ""){
+                filterDogs = originDogs
+            }else {
+                filterDogs = originDogs.filter((dog) => payload === 'created' ? dog.createInDb : !dog.createInDb)
+            }
             return {
                 ...state,
                 dogs: filterDogs,

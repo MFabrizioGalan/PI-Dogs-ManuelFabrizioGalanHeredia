@@ -4,7 +4,7 @@ const { getApiDogs } = require('./getApiDogs');
 const { getDbDogs } = require('./getDbDogs');
 const { getAllTemperaments} = require('./temperamentsController.js');
 const axios = require('axios');
-
+const { API_KEY } = process.env;
 
 const getAllDogs = async () => {
     const apiDogs = await getApiDogs();
@@ -13,35 +13,61 @@ const getAllDogs = async () => {
     return allDogs;
 };
 
-const getDogsById = async (id, source) => {
-    // const dog = 
-    //     source === "api"
-    //         ? (await axios.get(`https://api.thedogapi.com/v1/breeds/${id}`))
-    //             .data
-    //         : await Dog.findByPk(id);
-    // return dog;
-    let dog;
-    if (source === "api") {
-        const response = await axios.get(`https://api.thedogapi.com/v1/breeds/${id}`);
-        const { name, height, weight, life_span, temperament } = response.data;
-        const heightMetric = height.metric;
-        const weightMetric = weight.metric;
-        dog = { name, height: heightMetric, weight: weightMetric, life_span, temperament, createInDb: false };
-    } else {
-        dog = await Dog.findByPk(id, { include: Temperament});
-        // const dogFromDb = await Dog.findByPk(id);
-        // dog = {
-        //   name: dogFromDb.name,
-        //   height: dogFromDb.height.height.metric,
-        //   weight: dogFromDb.weight.weight.metric,
-        //   life_span: dogFromDb.life_span,
-        //   image: dogFromDb.image,
-        //   temperament: dogFromDb.temperament,
-        //   createInDb: true
-        // };
+// const getDogsById = async (id, source) => {
+//     // const dog = 
+//     //     source === "api"
+//     //         ? (await axios.get(`https://api.thedogapi.com/v1/breeds/${id}`))
+//     //             .data
+//     //         : await Dog.findByPk(id);
+//     // return dog;
+//     let dog;
+//     if (source === "api") {
+//         const response = await axios.get(`https://api.thedogapi.com/v1/breeds/${id}?api_key=${API_KEY}`);
+//         const data = response.data; 
+//         // const imageUrl = data.image && data.image.url ? data.image.url : "No disponible";
+//         dog = {
+//             id: data.id,
+//             name: data.name,
+//             life_span: data.life_span,
+//             // image: imageUrl,
+//             height: data["height"]["metric"],
+//             weight: data["weight"]["metric"],
+//             temperament: data.temperament?.split(",").map(temperament => temperament.trim())
+//         };
+//         // const { name, height, weight, life_span, temperament } = response.data;
+//         // const heightMetric = height.metric;
+//         // const weightMetric = weight.metric;
+//         // dog = { name, height: heightMetric, weight: weightMetric, life_span, temperament, createInDb: false };
+//     } else {
+//         dog = await Dog.findByPk(id, { include: Temperament});
+//         // const dogFromDb = await Dog.findByPk(id);
+//         // dog = {
+//         //   name: dogFromDb.name,
+//         //   height: dogFromDb.height.height.metric,
+//         //   weight: dogFromDb.weight.weight.metric,
+//         //   life_span: dogFromDb.life_span,
+//         //   image: dogFromDb.image,
+//         //   temperament: dogFromDb.temperament,
+//         //   createInDb: true
+//         // };
+//     }
+//     return dog;
+// };
+
+const getDogsById = async () => {
+    const id  = req.params.id
+    const allDogs = await getAllDogs()
+    try {
+        if (id) {
+            const dogId = await allDogs.find(dog => dog.id == (id))
+            dogId ? res.status(200).send(dogId) : res.status(404).json("Dog not found");
+        }
+    } catch (error) {
+        return res.status(404).send(error.message)
     }
-    return dog;
-};
+}
+
+
 
 const getDogsByName = async (name) => {
     const allDogs = await getAllDogs();
@@ -130,7 +156,7 @@ const getDogsByName = async (name) => {
 //     return newDog;
 // };
 
-const postDogs = async (name, height, weight, life_span, image, temperament, createInDb = true) => {
+const postDogs = async (name, height, weight, life_span, image, temperaments, createInDb = true) => {
     const dbResponse = await Dog.findAll({
         where: {
             name: {
@@ -150,21 +176,19 @@ const postDogs = async (name, height, weight, life_span, image, temperament, cre
         weight,
         life_span,
         image,
-        createInDb, // Establecer createInDb directamente a true o false según corresponda.
-        temperament,
+        createInDb // Establecer createInDb directamente a true o false según corresponda.
     });
 
     // Verificar si existen temperamentos seleccionados desde el front-end
-    if (temperament && temperament.length > 0) {
+    if (temperaments && temperaments.length > 0) {
         // Buscar todos los temperamentos en una sola consulta
         const temperamentsFound = await Temperament.findAll({
             where: {
-                name: temperament, // Buscar por nombres de temperamentos que coincidan con los seleccionados
+                id: temperaments, // Buscar por ids de temperamentos que coincidan con los seleccionados
             },
         });
-
         // Verificar si todos los temperamentos seleccionados existen en la base de datos
-        if (temperamentsFound.length !== temperament.length) {
+        if (temperamentsFound.length !== temperaments.length) {
             throw new Error("Alguno de los temperamentos seleccionados no existe");
         }
 
